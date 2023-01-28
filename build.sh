@@ -1,0 +1,1 @@
+docker buildx build -t ksw8954/account-book-frontend2 --push . 
