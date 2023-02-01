@@ -64,7 +64,7 @@ export const AccountCardEdit = () => (
   <Edit>
     <SimpleForm>
       <TextInput source="id" disabled />
-      <TextInput source="name" label={"이름"} />
+      <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
       <SelectInput source={"type"} choices={ACCOUNT_CARD_TYPE_OBJECT} label={"타입"} />
       <AmountInput source="amount" label={"금액"} />
       <DateTimeInput source="createdAt" label={"생성일"} disabled />
@@ -76,7 +76,7 @@ export const AccountCardEdit = () => (
 export const AccountCardCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="name" label={"이름"} />
+      <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
       <SelectInput source={"type"} choices={ACCOUNT_CARD_TYPE_OBJECT} label={"타입"} />
       <AmountInput source="amount" label={"금액"} />
     </SimpleForm>

@@ -38,7 +38,7 @@ export const CategoryEdit = () => (
       <ReferenceInput source="mainCategory.id" reference={"main-category/all"}>
         <SelectInput optionText="name" optionValue="id" label={"대분류"} />
       </ReferenceInput>
-      <TextInput source="name" label={"이름"} />
+      <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
       <SelectInput source="type" choices={TypeChoice} optionValue={"id"} label={"타입"} />
     </SimpleForm>
   </Edit>
@@ -56,7 +56,7 @@ export const CategoryCreate = () => {
         <ReferenceInput source="mainCategory.id" reference={"main-category/all"}>
           <SelectInput optionText="name" optionValue="id" label={"대분류"} />
         </ReferenceInput>
-        <TextInput source="name" label={"이름"} />
+        <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
         <SelectInput source="type" choices={TypeChoice} optionValue={"id"} label={"타입"} />
       </SimpleForm>
     </Create>

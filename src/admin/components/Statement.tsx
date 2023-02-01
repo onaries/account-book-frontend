@@ -276,7 +276,7 @@ export const StatementEdit = (props: any) => {
         <ReferenceInput source={"category.id"} reference={"category/all"}>
           <SelectInput optionText={optionRenderer} optionValue={"id"} label={"분류"} />
         </ReferenceInput>
-        <TextInput source="name" label={"이름"} />
+        <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
         <AmountInput
           source="amount"
           label={"금액"}
@@ -299,7 +299,7 @@ export const StatementEdit = (props: any) => {
           <SelectInput optionText={"name"} optionValue={"id"} label={"계좌/카드"} />
         </ReferenceInput>
         <DateTimeInput source="date" label={"날짜"} />
-        <TextInput source="description" label="메모" multiline />
+        <TextInput source="description" label="메모" multiline className="w-full sm:w-80 md:w-80" />
         <DateTimeInput source="createdAt" disabled label={"생성일"} />
         <DateTimeInput source="updatedAt" disabled label={"수정일"} />
       </SimpleForm>

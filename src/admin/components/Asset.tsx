@@ -67,10 +67,10 @@ export const AssetEdit = () => (
   <Edit>
     <SimpleForm>
       <TextInput source="id" disabled />
-      <TextInput source="name" label="이름" />
+      <TextInput source="name" label="이름" className="w-full sm:w-80 md:w-80" />
       <SelectInput source="type" choices={ASSET_TYPE_OBJECT} optionValue="id" label="타입" />
       <AmountInput source="amount" label="잔액" />
-      <TextInput source="description" multiline label="설명" />
+      <TextInput source="description" multiline label="설명" className="w-full sm:w-80 md:w-80" />
       <DateTimeInput disabled source="createdAt" label="생성일" />
       <DateTimeInput disabled source="updatedAt" label="수정일" />
     </SimpleForm>
@@ -81,10 +81,10 @@ export const AssetCreate = () => {
   return (
     <Create>
       <SimpleForm>
-        <TextInput source="name" label="이름" />
+        <TextInput source="name" label="이름" className="w-full sm:w-80 md:w-80" />
         <SelectInput source="type" choices={ASSET_TYPE_OBJECT} optionValue={"id"} label="타입" />
         <AmountInput source="amount" label="잔액" />
-        <TextInput source="description" multiline label="설명" />
+        <TextInput source="description" multiline label="설명" className="w-full sm:w-80 md:w-80" />
       </SimpleForm>
     </Create>
   );

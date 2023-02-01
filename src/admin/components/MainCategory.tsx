@@ -39,7 +39,7 @@ export const MainCategoryEdit = () => (
   <Edit>
     <SimpleForm>
       <TextInput source="id" disabled />
-      <TextInput source="name" label={"이름"} />
+      <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
       <NumberInput source="weeklyLimit" label={"예산(주단위)"} />
       <TextInput source="createdAt" disabled label={"생성일"} />
       <TextInput source="updatedAt" disabled label={"수정일"} />
@@ -50,7 +50,7 @@ export const MainCategoryEdit = () => (
 export const MainCategoryCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="name" label={"이름"} />
+      <TextInput source="name" label={"이름"} className="w-full sm:w-80 md:w-80" />
       <NumberInput source="weeklyLimit" label={"예산(주단위)"} />
     </SimpleForm>
   </Create>
