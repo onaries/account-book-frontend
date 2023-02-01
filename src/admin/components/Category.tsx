@@ -10,15 +10,17 @@ import {
   ReferenceInput,
   SelectInput,
   Create,
+  SelectField,
 } from "react-admin";
 import CustomPagination from "../fields/CustomPagination";
+import { CATEGORY_TYPE_OBJECT } from "../../consts";
 export const CategoryList = () => (
   <List pagination={<CustomPagination />} perPage={25}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <NumberField source="mainCategory.name" label={"대분류"} />
       <TextField source="name" label={"이름"} />
-      <NumberField source="type" label={"타입"}  />
+      <SelectField source="type" choices={CATEGORY_TYPE_OBJECT} label={"타입"} />
     </Datagrid>
   </List>
 );
