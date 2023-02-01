@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-admin", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:4.7.1"],\
             ["react-dom", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:18.2.0"],\
             ["react-hook-form", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:7.42.1"],\
+            ["react-icons", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:4.7.1"],\
             ["react-number-format", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:5.1.3"],\
             ["react-query", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:3.39.2"],\
             ["react-router", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:6.7.0"],\
@@ -1336,6 +1337,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-admin", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:4.7.1"],\
             ["react-dom", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:18.2.0"],\
             ["react-hook-form", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:7.42.1"],\
+            ["react-icons", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:4.7.1"],\
             ["react-number-format", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:5.1.3"],\
             ["react-query", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:3.39.2"],\
             ["react-router", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:6.7.0"],\
@@ -4186,6 +4188,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-76c0d416a7/0/cache/react-hook-form-npm-7.42.1-4e859d521c-f0dcf5d7f6.zip/node_modules/react-hook-form/",\
           "packageDependencies": [\
             ["react-hook-form", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:7.42.1"],\
+            ["@types/react", "npm:18.0.27"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-icons", [\
+        ["npm:4.7.1", {\
+          "packageLocation": "./.yarn/cache/react-icons-npm-4.7.1-27c284b383-ed3cbdc5fc.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "npm:4.7.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:4.7.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-icons-virtual-1123d14fbf/0/cache/react-icons-npm-4.7.1-27c284b383-ed3cbdc5fc.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "virtual:4298cafe683b61937c27fe2b97562978906b0d011a76e9666bbd70edc55cf155c9c32f0bb7b21a45529c849f4ebdad55d1180d37eba027000464d5a55ff762e3#npm:4.7.1"],\
             ["@types/react", "npm:18.0.27"],\
             ["react", "npm:18.2.0"]\
           ],\

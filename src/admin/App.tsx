@@ -13,6 +13,14 @@ import { green } from "@mui/material/colors";
 import { LoanList, LoanEdit, LoanCreate } from "./components/Loan";
 import { AssetList, AssetCreate, AssetEdit } from "./components/Asset";
 import { i18nProvider } from "./provider/i18nProvider";
+import {
+  MdCategory,
+  MdViewComfy,
+  MdOutlineAccountBalanceWallet,
+  MdOutlineMoney,
+  MdOutlineHomeWork,
+  MdReceiptLong,
+} from "react-icons/md";
 
 const dataProvider = customProvider(baseUrl);
 
@@ -105,6 +113,7 @@ const App = () => (
       edit={CategoryEdit}
       create={CategoryCreate}
       options={{ label: "분류" }}
+      icon={MdCategory}
     />
     <Resource
       name="main-category"
@@ -112,6 +121,7 @@ const App = () => (
       edit={MainCategoryEdit}
       create={MainCategoryCreate}
       options={{ label: "대분류" }}
+      icon={MdViewComfy}
     />
     <Resource
       name={"account-card"}
@@ -119,14 +129,30 @@ const App = () => (
       edit={AccountCardEdit}
       create={AccountCardCreate}
       options={{ label: "계좌/카드" }}
+      icon={MdOutlineAccountBalanceWallet}
     />
-    <Resource name="asset" list={AssetList} edit={AssetEdit} create={AssetCreate} options={{ label: "자산" }} />
-    <Resource name="loan" list={LoanList} edit={LoanEdit} create={LoanCreate} options={{ label: "대출" }} />
+    <Resource
+      name="asset"
+      list={AssetList}
+      edit={AssetEdit}
+      create={AssetCreate}
+      options={{ label: "자산" }}
+      icon={MdOutlineMoney}
+    />
+    <Resource
+      name="loan"
+      list={LoanList}
+      edit={LoanEdit}
+      create={LoanCreate}
+      options={{ label: "대출" }}
+      icon={MdOutlineHomeWork}
+    />
     <Resource
       name="statement"
       list={StatementList}
       edit={StatementEdit}
       create={StatementCreate}
+      icon={MdReceiptLong}
       options={{ label: "내역" }}
     />
     {/*<Resource name="comments" list={ListGuesser} />*/}
