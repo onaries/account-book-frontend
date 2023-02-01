@@ -4,7 +4,8 @@ import { Title } from "react-admin";
 import { useQuery } from "react-query";
 import { getTotalAmount, getTotalAmountByCategory } from "./api/statement";
 import dayjs from "dayjs";
-import { NumericFormat } from "react-number-format";
+import MonthlyCard from "./components/dashboard/MonthlyCard";
+import AssetCard from "./components/dashboard/AssetCard";
 
 const Dashboard = () => {
   const isSmall = useMediaQuery((theme: any) => theme.breakpoints.down("sm"));
@@ -17,48 +18,22 @@ const Dashboard = () => {
     <div>
       <Grid container spacing={2} className="pt-4">
         <Grid item xs={isSmall ? 12 : 6}>
-          <Card className="text-black">
-            <CardContent>
-              <Typography variant={"h5"}>{date}</Typography>
-              <Box className={"flex mt-2"}>
-                <Typography className={"w-12"}>수입</Typography>
-                <NumericFormat
-                  disabled
-                  className={"font-bold text-right bg-white"}
-                  value={categoryTotalData ? categoryTotalData[0] : 0}
-                  thousandSeparator=","
-                />
-              </Box>
-              <Box className={"flex mt-1"}>
-                <Typography className={"w-12"}>지출</Typography>
-                <NumericFormat
-                  disabled
-                  className={"font-bold text-right bg-white"}
-                  value={categoryTotalData ? categoryTotalData[1] : 0}
-                  thousandSeparator=","
-                />
-              </Box>
-              <Box className={"flex mt-1"}>
-                <Typography className={"w-12"}>저축</Typography>
-                <NumericFormat
-                  disabled
-                  className={"font-bold text-right bg-white"}
-                  value={categoryTotalData ? categoryTotalData[2] : 0}
-                  thousandSeparator=","
-                />
-              </Box>
-              <Box className={"flex mt-1"}>
-                <Typography className={"w-12"}>월 잔액</Typography>
-                <NumericFormat
-                  disabled
-                  className={"font-bold text-right bg-white"}
-                  value={data}
-                  thousandSeparator=","
-                />
-              </Box>
-            </CardContent>
-          </Card>
+          <AssetCard />
         </Grid>
+
+        <Grid item xs={12}>
+          <Box className="p-4">
+            <Typography variant="h6" className="">
+              최근 4개월 통계
+            </Typography>
+          </Box>
+        </Grid>
+
+        {[0, 1, 2, 3].map((month) => (
+          <Grid item xs={isSmall ? 12 : 6}>
+            <MonthlyCard month={dayjs().month() - month} />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
