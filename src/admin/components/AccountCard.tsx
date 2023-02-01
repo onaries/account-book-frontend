@@ -23,6 +23,7 @@ import {
   SimpleList,
 } from "react-admin";
 import { ACCOUNT_CARD_TYPE_OBJECT, ACCOUNT_CARD_TYPE } from "../../consts";
+import AmountInput from "../inputs/AmountInput";
 
 const AccountCardListActions = () => (
   <TopToolbar>
@@ -65,7 +66,7 @@ export const AccountCardEdit = () => (
       <TextInput source="id" disabled />
       <TextInput source="name" label={"이름"} />
       <SelectInput source={"type"} choices={ACCOUNT_CARD_TYPE_OBJECT} label={"타입"} />
-      <NumberInput source="amount" label={"금액"} />
+      <AmountInput source="amount" label={"금액"} />
       <DateTimeInput source="createdAt" label={"생성일"} disabled />
       <DateTimeInput source="updatedAt" label={"수정일"} disabled />
     </SimpleForm>
@@ -77,7 +78,7 @@ export const AccountCardCreate = () => (
     <SimpleForm>
       <TextInput source="name" label={"이름"} />
       <SelectInput source={"type"} choices={ACCOUNT_CARD_TYPE_OBJECT} label={"타입"} />
-      <NumberInput source="amount" label={"금액"} />
+      <AmountInput source="amount" label={"금액"} />
     </SimpleForm>
   </Create>
 );

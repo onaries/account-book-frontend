@@ -3,7 +3,6 @@ import {
   Button,
   Create,
   CreateButton,
-  Datagrid,
   DatagridConfigurable,
   DateField,
   DateInput,
@@ -13,7 +12,6 @@ import {
   FilterButton,
   List,
   NumberField,
-  NumberInput,
   ReferenceInput,
   SelectColumnsButton,
   SelectInput,
@@ -24,11 +22,15 @@ import {
   TextField,
   TextInput,
   TopToolbar,
+  useCreateController,
   useEditContext,
+  useEditController,
+  useListController,
+  useListFilterContext,
 } from "react-admin";
-import { Box, Paper, useMediaQuery } from "@mui/material";
+import { Box, Divider, Paper, Typography, useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
-import { CATEGORY_TYPE, CATEGORY_TYPE_OBJECT } from "../../consts";
+import { CATEGORY_TYPE, CATEGORY_TYPE_OBJECT, CATEGORY_TYPE_COLOR } from "../../consts";
 import { CustomTypeField } from "../fields/CustomTypeField";
 import {
   Dialog,
@@ -41,10 +43,20 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { postAlertStatement } from "../api/statement";
+import { postAlertStatement, getStatementSummary } from "../api/statement";
+import AmountField from "../fields/AmountField";
+import AmountInput from "../inputs/AmountInput";
+
+const optionRenderer = (choice: any) => `${choice.mainCategory.name}/${choice.name}`;
 
 const statementFilters = [
-  <SelectInput source={"type"} choices={CATEGORY_TYPE_OBJECT} label={"타입"} alwaysOn />,
+  <SelectInput source={"type"} choices={CATEGORY_TYPE_OBJECT} optionValue="id" label={"타입"} alwaysOn />,
+  <ReferenceInput source={"category_id"} reference={"category/all"} label="분류">
+    <SelectInput optionText={optionRenderer} optionValue={"id"} label={"분류"} />
+  </ReferenceInput>,
+  <ReferenceInput source="main_category_id" reference={"main-category/all"} label="대분류">
+    <SelectInput optionText="name" optionValue="id" label={"대분류"} />
+  </ReferenceInput>,
   <DateInput source="date_gte" label={"날짜보다 큼"} />,
   <DateInput source="date_lte" label={"날짜보다 작음"} />,
 ];
@@ -61,6 +73,22 @@ const StatementListActions = () => (
 
 export const StatementList = (props: any) => {
   const isSmall = useMediaQuery((theme: any) => theme.breakpoints.down("sm"));
+
+  const listContext = useListController();
+
+  const { data } = useQuery(
+    [
+      "summary",
+      listContext.page,
+      listContext.perPage,
+      listContext.filterValues.date_gte,
+      listContext.filterValues.date_lte,
+      listContext.filterValues.type,
+      listContext.filterValues.category_id,
+      listContext.filterValues.main_category_id,
+    ],
+    getStatementSummary
+  );
 
   return (
     <List
@@ -79,22 +107,64 @@ export const StatementList = (props: any) => {
                 "ko-kr"
               ).format(record.discount)}원)`
             }
-            tertiaryText={(record) => `${dayjs(record.date).format("YYYY-MM-DD HH:mm")}`}
+            tertiaryText={(record) => (
+              <Typography className="text-black">{dayjs(record.date).format("YYYY-MM-DD HH:mm")}</Typography>
+            )}
+            rowStyle={(record) => ({
+              color: CATEGORY_TYPE_COLOR[record.category.type - 1],
+            })}
           />
+          <Divider />
+          <Box className="p-2">
+            <Typography>
+              [페이지 합계]
+              {data &&
+                ` 금액: ${data.pageAmount.toLocaleString("ko-KR")}, 할인: ${data.pageDiscount.toLocaleString("ko-KR")}`}
+            </Typography>
+          </Box>
+          <Box className="p-2">
+            <Typography>
+              [전체 합계]
+              {data &&
+                ` 금액: ${data.totalAmount.toLocaleString("ko-KR")}, 할인: ${data.totalDiscount.toLocaleString(
+                  "ko-KR"
+                )}`}
+            </Typography>
+          </Box>
+          <Divider />
         </>
       ) : (
-        <DatagridConfigurable rowClick="edit">
-          <TextField source="id" />
-          <CustomTypeField source="category.type" label={"타입"} />
-          <NumberField source="category.name" label={"분류"} />
-          <TextField source="name" label={"내용"} />
-          <NumberField source="amount" label={"금액"} />
-          <NumberField source="discount" label={"할인금액"} />
-          <NumberField source="accountCard.name" label={"계좌/카드"} />
-          <DateField source="date" label={"날짜"} />
-          <DateField source="createdAt" label={"생성일"} />
-          <DateField source="updatedAt" label={"수정일"} />
-        </DatagridConfigurable>
+        <>
+          <DatagridConfigurable rowClick="edit">
+            <TextField source="id" />
+            <CustomTypeField source="category.type" label={"타입"} />
+            <NumberField source="category.name" label={"분류"} />
+            <TextField source="name" label={"내용"} />
+            <AmountField source="amount" label={"금액"} />
+            <NumberField source="discount" label={"할인금액"} />
+            <NumberField source="saving" label="저축금액" />
+            <NumberField source="accountCard.name" label={"계좌/카드"} />
+            <DateField source="date" label={"날짜"} />
+            <DateField source="createdAt" label={"생성일"} />
+            <DateField source="updatedAt" label={"수정일"} />
+          </DatagridConfigurable>
+          <Box className="p-2">
+            <Typography>
+              [페이지 합계]
+              {data &&
+                ` 금액: ${data.pageAmount.toLocaleString("ko-KR")}, 할인: ${data.pageDiscount.toLocaleString("ko-KR")}`}
+            </Typography>
+          </Box>
+          <Box className="p-2">
+            <Typography>
+              [전체 합계]
+              {data &&
+                ` 금액: ${data.totalAmount.toLocaleString("ko-KR")}, 할인: ${data.totalDiscount.toLocaleString(
+                  "ko-KR"
+                )}`}
+            </Typography>
+          </Box>
+        </>
       )}
     </List>
   );
@@ -144,11 +214,11 @@ const StatementEditActions = () => {
   );
 };
 
-export const StatementEdit = () => {
+export const StatementEdit = (props: any) => {
   const isSmall = useMediaQuery((theme: any) => theme.breakpoints.down("sm"));
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
-  const { record } = useEditContext();
+  const { record } = useEditController();
 
   const postAlert = useMutation(postAlertStatement, {
     mutationKey: "postAlert",
@@ -170,8 +240,6 @@ export const StatementEdit = () => {
     postAlert.mutate({ mutationKey: { id: record.id } });
     handleClose();
   };
-
-  const optionRenderer = (choice: any) => `${choice.mainCategory.name}-${choice.name}`;
 
   return (
     <Edit
@@ -209,8 +277,24 @@ export const StatementEdit = () => {
           <SelectInput optionText={optionRenderer} optionValue={"id"} label={"분류"} />
         </ReferenceInput>
         <TextInput source="name" label={"이름"} />
-        <NumberInput source="amount" label={"금액"} />
-        <NumberInput source="discount" label={"할인금액"} />
+        <AmountInput
+          source="amount"
+          label={"금액"}
+          parse={(value) => {
+            if (value < 0) {
+              return value * -1;
+            }
+            return value;
+          }}
+          format={(value) => {
+            if (value < 0) {
+              return value * -1;
+            }
+            return value;
+          }}
+        />
+        <AmountInput source="discount" label={"할인금액"} />
+        <AmountInput source="saving" label="저축금액" />
         <ReferenceInput source={"accountCard.id"} reference={"account-card/all"}>
           <SelectInput optionText={"name"} optionValue={"id"} label={"계좌/카드"} />
         </ReferenceInput>
@@ -224,8 +308,6 @@ export const StatementEdit = () => {
 };
 
 export const StatementCreate = () => {
-  const optionRenderer = (choice: any) => `${choice.mainCategory.name}-${choice.name}`;
-
   return (
     <Create
       transform={(data: any) => {
@@ -244,14 +326,15 @@ export const StatementCreate = () => {
           <SelectInput optionText={optionRenderer} optionValue={"id"} label={"분류"} />
         </ReferenceInput>
         <TextInput source="name" label={"내역"} />
-        <NumberInput source="amount" label={"금액"} />
-        <NumberInput source="discount" label={"할인금액"} />
+        <AmountInput source="amount" label="금액" />
+        <AmountInput source="discount" label={"할인금액"} />
+        <AmountInput source="saving" label="저축금액" />
         <ReferenceInput source={"accountCard.id"} reference={"account-card/all"}>
           <SelectInput optionText={"name"} optionValue={"id"} label={"계좌/카드"} />
         </ReferenceInput>
         <TextInput source="description" label="메모" multiline />
         <DateTimeInput source="date" label={"날짜"} />
-        <BooleanInput source={"is_alert"} label={"알림 여부"} />
+        <BooleanInput source="isAlert" label={"알림 여부"} />
       </SimpleForm>
     </Create>
   );
