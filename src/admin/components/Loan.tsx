@@ -82,7 +82,7 @@ export const LoanEdit = () => (
       <NumberInput source="totalPeriod" label="총 기간(개월)" />
       <NumberInput source="currentPeriod" label="현재 기간(개월)" />
       <AmountInput source="amount" label="잔액" />
-      <TextInput source="description" label="설명" className="w-full sm:w-80 md:w-80" />
+      <TextInput source="description" label="설명" multiline className="w-full sm:w-80 md:w-80" />
       <DateInput source="createdAt" label="생성일" disabled />
       <DateInput source="updatedAt" label="수정일" disabled />
     </SimpleForm>
